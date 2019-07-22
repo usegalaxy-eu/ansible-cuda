@@ -1,0 +1,12 @@
+---
+- name: Create NVIDIA persistenced systemd unit file
+  copy:
+    src: "{{ nvidia_systemd_unit }}"
+    dest: "/etc/systemd/system/{{ nvidia_systemd_unit }}"
+
+- name: SystemD daemon-reload and enable/start service
+  systemd:
+    state: "{{ systemd_unit_state }}"
+    enabled: "{{ nvidia_systemd_enabled }}"
+    name: "{{ nvidia_systemd_unit }}"
+    daemon_reload: yes

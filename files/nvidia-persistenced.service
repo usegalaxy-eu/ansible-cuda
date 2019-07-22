@@ -1,0 +1,10 @@
+[Unit]
+Description=NVIDIA-persistenced
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/nvidia-persistenced --verbose
+
+[Install]
+WantedBy=multi-user.target
