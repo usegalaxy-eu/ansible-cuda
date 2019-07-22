@@ -1,0 +1,34 @@
+- hosts: gpus
+  become: true
+
+  tasks:
+    - name: Disabling Nouveau
+      copy:
+        src: blacklist-nouveau.conf
+        dest: /usr/lib/modprobe.d/blacklist-nouveau.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Regenerate the kernel initramfs
+      command: dracut --force
+
+    - name:  Verify the System has the Kernel Headers and Development Packages Installed
+      package:
+        name: "{{ packages }}"
+        state: installed
+      vars:
+        packages:
+        - kernel-devel
+        - kernel-headers
+
+    - name: Install cuda repository meta-data
+      package:
+        name: "{{ cuda_url }}"
+        state: installed
+
+    - name: Install CUDA
+      package:
+        name: cuda
+        state: installed
+        update_cache: true
