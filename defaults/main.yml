@@ -1,1 +1,4 @@
 cuda_url: http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-10.1.168-1.x86_64.rpm
+cuda_package_name: cuda-10.1
+user_profile_path: /home/centos/.bash_profile
+update_user_env: true

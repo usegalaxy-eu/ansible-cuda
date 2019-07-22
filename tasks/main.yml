@@ -19,8 +19,8 @@
         state: installed
       vars:
         packages:
-        - kernel-devel
-        - kernel-headers
+          - kernel-devel
+          - kernel-headers
 
     - name: Install cuda repository meta-data
       package:
@@ -29,6 +29,15 @@
 
     - name: Install CUDA
       package:
-        name: cuda
+        name: "{{ cuda_package_name }}"
         state: installed
         update_cache: true
+
+    - name: Update user environment setup
+      lineinfile:
+        path: "{{ user_profile_path }}"
+        line: "{{ item }}"
+      with_items:
+        - "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}"
+        - "export LD_LIBRARY_PATH=/usr/local/cuda/lib ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+      when: update_user_env | bool
