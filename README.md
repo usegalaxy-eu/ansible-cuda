@@ -1,7 +1,7 @@
 ansible-cuda
 =======
 
-Ansible role to install the CUDA toolkit as described in the [NVIDIA CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#abstract)
+Ansible role to install the CUDA toolkit as described in the [NVIDIA CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#abstract) in a Redhat/CentOS system.
 
 Requirements
 ------------

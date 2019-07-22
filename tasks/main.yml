@@ -1,4 +1,5 @@
 ---
+#https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
 - name: Disabling Nouveau
   copy:
