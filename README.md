@@ -7,6 +7,26 @@ Requirements
 ------------
 Ansible >= 2.4
 
+
+
+Usage
+-----
+Clone this repo into your roles directory:
+
+```bash
+$ git clone https://github.com/usegalaxy-eu/ansible-cuda.git roles/cuda
+```
+
+And add it to your playbook's roles:
+
+```yaml
+- hosts: yourhost
+
+  roles:
+    - role: cuda
+      become: yes
+```
+      
 License
 -------
 
