@@ -1,5 +1,6 @@
 # Cuda
 cuda_rhel7_url: http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-10.1.168-1.x86_64.rpm
+cuda_rhel7_gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/7fa2af80.pub
 cuda_rhel7_package_name: cuda-10-1
 
 # User profile
