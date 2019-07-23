@@ -6,7 +6,7 @@
 
 - name: SystemD daemon-reload and enable/start service
   systemd:
-    state: "{{ systemd_unit_state }}"
+    state: "{{ nvidia_systemd_state }}"
     enabled: "{{ nvidia_systemd_enabled }}"
     name: "{{ nvidia_systemd_unit }}"
     daemon_reload: yes
