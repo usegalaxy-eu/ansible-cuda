@@ -36,3 +36,4 @@
   when: update_user_env | bool
 
 - include_tasks: systemd.yml
+  when: install_systemd_unit | bool
