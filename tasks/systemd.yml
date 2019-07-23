@@ -3,6 +3,7 @@
   copy:
     src: "{{ nvidia_systemd_unit }}"
     dest: "/etc/systemd/system/{{ nvidia_systemd_unit }}"
+    mode: '0640'
 
 - name: SystemD daemon-reload and enable/start service
   systemd:
