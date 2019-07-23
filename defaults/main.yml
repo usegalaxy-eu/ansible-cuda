@@ -8,6 +8,5 @@ update_user_env: true
 
 # Systemd
 nvidia_systemd_unit: nvidia-persistenced.service
-nvidia_systemd: false
-nvidia_systemd_enabled: true
-nvidia_systemd_state: started
+nvidia_systemd_enabled: false
+nvidia_systemd_state: stopped
