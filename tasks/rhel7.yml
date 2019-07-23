@@ -35,3 +35,4 @@
     name: "{{ cuda_rhel7_package_name }}"
     state: installed
     update_cache: true
+  when: install_cuda | bool
