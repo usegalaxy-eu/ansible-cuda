@@ -1,4 +1,6 @@
 ---
+#https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#install-persistenced
+
 - name: Create NVIDIA persistenced systemd unit file
   copy:
     src: "{{ nvidia_systemd_unit }}"
