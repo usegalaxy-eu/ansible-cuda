@@ -4,5 +4,5 @@
     path: "{{ user_profile_path }}"
     line: "{{ item }}"
   with_items:
-    - "export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}"
-    - "export LD_LIBRARY_PATH=/usr/local/cuda/lib ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+    - "export PATH={{ cuda_rhel7_usr_path }}/bin${PATH:+:${PATH}}"
+    - "export LD_LIBRARY_PATH={{ cuda_rhel7_usr_path }}/lib ${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
