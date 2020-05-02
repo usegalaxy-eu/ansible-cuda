@@ -1,8 +1,7 @@
 ---
 - name: Update user environment setup
-  lineinfile:
-    path: "{{ user_profile_path }}"
-    line: "{{ item }}"
-  with_items:
-    - "export PATH={{ cuda_rhel7_usr_path }}/bin${PATH:+:${PATH}}"
-    - "export LD_LIBRARY_PATH={{ cuda_rhel7_usr_path }}/lib64:{{ cuda_rhel7_usr_path }}/extras/CUPTI/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+  template:
+    src: "cuda_profile.j2"
+    dest: "{{ cuda_profile_path }}"
+    mode: '0644'
+  

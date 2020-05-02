@@ -5,8 +5,8 @@ cuda_rhel7_gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhe
 cuda_rhel7_package_name: cuda-10-1
 cuda_rhel7_usr_path: /usr/local/cuda-10.1
 
-# User profile
-user_profile_path: /home/centos/.bash_profile
+# Cuda profile
+cuda_profile_path: /etc/profile.d/cuda.sh
 update_user_env: true
 
 # Systemd
