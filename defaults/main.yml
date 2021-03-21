@@ -9,7 +9,7 @@ cuda_rhel7_usr_path: /usr/local/cuda-10.1
 
 # CENTOS 8
 cuda_rhel8_url: http://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-repo-rhel8-10.1.243-1.x86_64.rpm
-cuda_rhel8gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/7fa2af80.pub
+cuda_rhel8_gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/7fa2af80.pub
 cuda_rhel8_package_name: cuda-10-1
 cuda_rhel8_usr_path: /usr/local/cuda-10.1
 
