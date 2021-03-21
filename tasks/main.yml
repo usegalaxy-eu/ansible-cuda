@@ -1,7 +1,7 @@
 ---
 #https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
-- include_tasks: rhel7.yml
+- include_tasks: rhel.yml
   when: ansible_os_family == "RedHat"
 
 - include_tasks: user.yml
