@@ -1,5 +1,5 @@
 ---
-#https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#install-persistenced
+# https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#install-persistenced
 
 - name: Create NVIDIA persistenced systemd unit file
   copy:
@@ -12,4 +12,4 @@
     state: "{{ nvidia_systemd_state }}"
     enabled: "{{ nvidia_systemd_enabled }}"
     name: "{{ nvidia_systemd_unit }}"
-    daemon_reload: yes
+    daemon_reload: true
