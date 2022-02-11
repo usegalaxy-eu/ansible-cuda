@@ -8,7 +8,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'usegalaxy_eu.nvidia-container'
+    working-directory: 'usegalaxy_eu.cuda'
 
 jobs:
   lint:
@@ -18,7 +18,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'usegalaxy_eu.nvidia-container'
+          path: 'usegalaxy_eu.cuda'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
