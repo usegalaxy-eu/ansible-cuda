@@ -1,15 +1,17 @@
 ---
 # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#install-persistenced
+- name: NVIDIA systemd configuration
+  block:
+    - name: Create NVIDIA persistenced systemd unit file
+      copy:
+        src: "{{ nvidia_systemd_unit }}"
+        dest: "/etc/systemd/system/{{ nvidia_systemd_unit }}"
+        mode: '0640'
 
-- name: Create NVIDIA persistenced systemd unit file
-  copy:
-    src: "{{ nvidia_systemd_unit }}"
-    dest: "/etc/systemd/system/{{ nvidia_systemd_unit }}"
-    mode: '0640'
-
-- name: SystemD daemon-reload and enable/start service
-  systemd:
-    state: "{{ nvidia_systemd_state }}"
-    enabled: "{{ nvidia_systemd_enabled }}"
-    name: "{{ nvidia_systemd_unit }}"
-    daemon_reload: true
+    - name: SystemD daemon-reload and enable/start service
+      systemd:
+        state: "{{ nvidia_systemd_state }}"
+        enabled: "{{ nvidia_systemd_enabled }}"
+        name: "{{ nvidia_systemd_unit }}"
+        daemon_reload: true
+  when: install_cuda | bool
