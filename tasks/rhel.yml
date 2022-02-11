@@ -1,60 +1,61 @@
 ---
+- name: Verify kernel settings
+  block:
+    - name: Disabling Nouveau
+      copy:
+        src: blacklist-nouveau.conf
+        dest: /usr/lib/modprobe.d/blacklist-nouveau.conf
+        owner: root
+        group: root
+        mode: '0644'
 
-- name: Disabling Nouveau
-  copy:
-    src: blacklist-nouveau.conf
-    dest: /usr/lib/modprobe.d/blacklist-nouveau.conf
-    owner: root
-    group: root
-    mode: '0644'
+    - name: Regenerate the kernel initramfs
+      command: dracut --force
 
-- name: Regenerate the kernel initramfs
-  command: dracut --force
+    - name: Verify the System has the Kernel Headers and Development Packages Installed
+      package:
+        name: "{{ packages }}"
+        state: installed
+      vars:
+        packages:
+          - kernel-devel
+          - kernel-headers
+  when: install_cuda | bool
 
-- name:  Verify the System has the Kernel Headers and Development Packages Installed
-  package:
-    name: "{{ packages }}"
-    state: installed
-  vars:
-    packages:
-      - kernel-devel
-      - kernel-headers
+- name: Set Cuda repositories for RHEL 7 and install it
+  block:
+    - name: Add Cuda gpg key (Centos 7)
+      rpm_key:
+        state: present
+        key: "{{ cuda_rhel7_gpg_key }}"
 
-- name: Add Cuda gpg key (Centos 7)
-  rpm_key:
-    state: present
-    key: "{{ cuda_rhel7_gpg_key }}"
-  when: ansible_distribution_major_version | int == 7
+    - name: Install cuda repository meta-data (Centos 7)
+      package:
+        name: "{{ cuda_rhel7_url }}"
+        state: installed
 
-- name: Install cuda repository meta-data (Centos 7)
-  package:
-    name: "{{ cuda_rhel7_url }}"
-    state: installed
-  when: ansible_distribution_major_version | int == 7
-
-- name: Install CUDA (Centos 7)
-  package:
-    name: "{{ cuda_rhel7_package_name }}"
-    state: installed
-    update_cache: true
+    - name: Install CUDA (RHEL 7)
+      package:
+        name: "{{ cuda_rhel7_package_name }}"
+        state: installed
+        update_cache: true
   when: install_cuda | bool and ansible_distribution_major_version | int == 7
 
-- name: Add Cuda gpg key (Centos 8)
-  rpm_key:
-    state: present
-    key: "{{ cuda_rhel8_gpg_key }}"
-  when: ansible_distribution_major_version | int == 8
+- name: Set Cuda repositories for RHEL 8 and install it
+  block:
+    - name: Add Cuda gpg key (RHEL 8)
+      rpm_key:
+        state: present
+        key: "{{ cuda_rhel8_gpg_key }}"
 
-- name: Install cuda repository meta-data (Centos 8)
-  package:
-    name: "{{ cuda_rhel8_url }}"
-    state: installed
-  when: ansible_distribution_major_version | int == 8
+    - name: Install cuda repository meta-data (RHEL 8)
+      package:
+        name: "{{ cuda_rhel8_url }}"
+        state: installed
 
-- name: Install CUDA (Centos 8)
-  package:
-    name: "{{ cuda_rhel8_package_name }}"
-    state: installed
-    update_cache: true
+    - name: Install CUDA (RHEL 8)
+      package:
+        name: "{{ cuda_rhel8_package_name }}"
+        state: installed
+        update_cache: true
   when: install_cuda | bool and ansible_distribution_major_version | int == 8
-

@@ -5,7 +5,7 @@ Ansible role to install the CUDA toolkit as described in the [NVIDIA CUDA Instal
 
 Requirements
 ------------
-Ansible >= 2.4
+Ansible >= 2.11
 
 
 
@@ -14,7 +14,7 @@ Usage
 Clone this repo into your roles directory:
 
 ```bash
-$ git clone https://github.com/usegalaxy-eu/ansible-cuda.git roles/cuda
+$ ansible-galaxy install usegalaxy_eu.cuda
 ```
 
 And add it to your playbook's roles:
@@ -23,7 +23,7 @@ And add it to your playbook's roles:
 - hosts: yourhost
 
   roles:
-    - role: cuda
+    - role: usegalaxy_eu.cuda
       become: yes
 ```
 
