@@ -6,16 +6,14 @@ install_cuda: true
 cuda_rhel7_url: http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-10.1.168-1.x86_64.rpm
 cuda_rhel7_gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/7fa2af80.pub
 cuda_rhel7_package_name: cuda-10-1
-cuda_rhel7_usr_path: /usr/local/cuda-10.1
 
 # RHEL 8
-cuda_rhel8_url: http://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-repo-rhel8-10.1.243-1.x86_64.rpm
-cuda_rhel8_gpg_key: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/7fa2af80.pub
-cuda_rhel8_package_name: cuda-10-1
-cuda_rhel8_usr_path: /usr/local/cuda-10.1
+cuda_rhel8_url: https://developer.download.nvidia.com/compute/cuda/repos/rhel8/x86_64/cuda-rhel8.repo
+cuda_rhel8_package_name: cuda-11-6
 
 # Cuda profile
 cuda_profile_path: /etc/profile.d/cuda.sh
+cuda_usr_path: /usr/local/cuda
 update_user_env: true
 
 # Systemd
