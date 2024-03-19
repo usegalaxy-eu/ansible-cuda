@@ -56,15 +56,19 @@
   when: ansible_distribution_major_version | int == 8
 
 - name: Set Cuda repositories for RHEL 9 and install it
+  when: ansible_distribution_major_version | int == 9
   block:
     - name: Enable cuda repository meta-data (RHEL 9)
       ansible.builtin.command:
         cmd: "dnf config-manager --add-repo {{ cuda_rhel9_url }}"
-
     - name: Install CUDA (RHEL 9)
-      package:
+      ansible.builtin.package:
         name: "{{ cuda_rhel9_package_name }}"
         state: installed
         update_cache: true
       when: install_cuda | bool
-  when: ansible_distribution_major_version | int == 9
+    - name: Update to latest nvidia driver
+      ansible.builtin.dnf:
+        name: '@nvidia-driver:latest-dkms'
+        state: present
+        allowerasing: true
