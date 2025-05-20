@@ -64,11 +64,6 @@
     - name: Install CUDA (RHEL 9)
       ansible.builtin.package:
         name: "{{ cuda_rhel9_package_name }}"
-        state: installed
+        state: present
         update_cache: true
       when: install_cuda | bool
-    - name: Update to latest nvidia driver
-      ansible.builtin.dnf:
-        name: '@nvidia-driver:latest-dkms'
-        state: present
-        allowerasing: true
