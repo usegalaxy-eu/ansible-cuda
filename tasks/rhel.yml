@@ -76,17 +76,38 @@
 - name: Set Cuda repositories for RHEL 10 and install it
   when: ansible_distribution_major_version | int == 10
   block:
-    - name: Enable cuda repository meta-data (RHEL 10)
+    - name: Enable CRB and EPEL 10 repositories
+      ansible.builtin.shell: |
+        dnf config-manager --set-enabled crb
+        dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+      changed_when: false
+
+    - name: Add NVIDIA RHEL 10 Network Repository
       ansible.builtin.command:
-        cmd: "dnf config-manager --add-repo {{ cuda_rhel10_url }}"
-    - name: Install CUDA (RHEL 10)
-      ansible.builtin.package:
-        name: "{{ cuda_rhel10_package_name }}"
-        state: installed
-        update_cache: true
-      when: install_cuda | bool
-    - name: Update to latest nvidia driver
+        cmd: "dnf config-manager --add-repo {{ cuda_rhel10_url | default('https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo') }}"
+      changed_when: false
+
+    - name: Install Kernel Headers and Development packages (RHEL 10 style)
       ansible.builtin.dnf:
-        name: '@nvidia-driver:latest-dkms'
+        name:
+          - kernel-devel-matched
+          - kernel-headers
+        state: present
+
+    - name: Clean DNF cache
+      ansible.builtin.command: dnf clean expire-cache
+      changed_when: false
+
+    - name: Install NVIDIA Driver (Proprietary Method)
+      ansible.builtin.dnf:
+        name: cuda-drivers
         state: present
         allowerasing: true
+      register: driver_install
+
+    - name: Install CUDA Toolkit
+      ansible.builtin.dnf:
+        name: "{{ cuda_rhel10_package_name | default('cuda') }}"
+        state: present
+        allowerasing: true
+      when: install_cuda | bool
