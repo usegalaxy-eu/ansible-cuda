@@ -72,3 +72,21 @@
         name: '@nvidia-driver:latest-dkms'
         state: present
         allowerasing: true
+
+- name: Set Cuda repositories for RHEL 10 and install it
+  when: ansible_distribution_major_version | int == 10
+  block:
+    - name: Enable cuda repository meta-data (RHEL 10)
+      ansible.builtin.command:
+        cmd: "dnf config-manager --add-repo {{ cuda_rhel10_url }}"
+    - name: Install CUDA (RHEL 10)
+      ansible.builtin.package:
+        name: "{{ cuda_rhel10_package_name }}"
+        state: installed
+        update_cache: true
+      when: install_cuda | bool
+    - name: Update to latest nvidia driver
+      ansible.builtin.dnf:
+        name: '@nvidia-driver:latest-dkms'
+        state: present
+        allowerasing: true
