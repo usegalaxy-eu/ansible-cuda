@@ -100,7 +100,7 @@
 
     - name: Install NVIDIA Driver (Proprietary Method)
       ansible.builtin.dnf:
-        name: cuda-drivers
+        name: nvidia-open
         state: present
         allowerasing: true
       register: driver_install
