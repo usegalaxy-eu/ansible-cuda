@@ -15,6 +15,10 @@ cuda_rhel8_package_name: cuda-11-6
 cuda_rhel9_url: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-rhel9.repo
 cuda_rhel9_package_name: cuda-11-6
 
+# RHEL 10
+cuda_rhel10_url: https://developer.download.nvidia.com/compute/cuda/repos/rhel10/x86_64/cuda-rhel10.repo
+cuda_rhel10_package_name: cuda
+
 # Cuda profile
 cuda_profile_path: /etc/profile.d/cuda.sh
 cuda_usr_path: /usr/local/cuda
