@@ -103,7 +103,6 @@
         name: nvidia-open
         state: present
         allowerasing: true
-      register: driver_install
 
     - name: Install CUDA Toolkit
       ansible.builtin.dnf:
